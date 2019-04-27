@@ -1,0 +1,25 @@
+.repository {
+  border-bottom: 1px #f0f0f0 solid;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+
+.repository h3 a {
+  margin-left: 0.5em;
+}
+
+.footer {
+  font-size: 0.9em;
+  margin-top: 1em;
+}
+
+.footer > span:not(.language) {
+  margin-right: 1.5em;
+}
+
+.footer > span.language {
+  width: 0.8em;
+  height: 0.8em;
+  display: inline-block;
+  border-radius: 0.8em;
+}

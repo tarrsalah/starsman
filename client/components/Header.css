@@ -1,0 +1,18 @@
+.header {
+  line-height: 3rem;
+}
+
+.header nav {
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+}
+
+.header a {
+  color: #555;
+  font-weight: 700;
+}
+
+.header a:hover {
+  color: #000;
+}

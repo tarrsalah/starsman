@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  color: #333;
+  background-color: #fffefc;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+p {
+  color: #666;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input[type="text"] {
+  border-radius: 0;
+  padding: 0.25rem 0.375rem;
+}
+
+form input {
+  width: 100%;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+}
+
+:global .pull-left {
+  float: left;
+}
+
+:global .pull-right {
+  float: right;
+}

@@ -1,0 +1,19 @@
+.languages {
+  max-width: 20em;
+}
+
+.language {
+  display: block;
+  clear: both;
+  padding: 2px 10px;
+  line-height: 2em;
+  cursor: pointer;
+}
+
+.language:hover {
+  background-color: #f0f0f0;
+}
+
+.count {
+  float: right;
+}

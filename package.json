@@ -1,0 +1,39 @@
+{
+  "scripts": {
+    "start": "nodemon -r @babel/register --watch server server/index.js",
+    "test": "tape tests/**/*.js",
+    "dev": "parcel watch ./client/index.js -o bundle -d ./public",
+    "build": "parcel build ./client/index.js -o bundle -d ./public"
+  },
+  "dependencies": {
+    "@hapi/bell": "^10.1.0",
+    "@hapi/cookie": "^10.1.0",
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.0",
+    "@primer/octicons-react": "^9.1.1",
+    "dotenv": "^8.1.0",
+    "fuzzysearch": "^1.0.3",
+    "isomorphic-fetch": "^2.2.1",
+    "memory-cache": "^0.2.0",
+    "mobx": "^5.13.0",
+    "mobx-react": "^6.1.3",
+    "postcss-modules": "^1.4.1",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "sqlite": "^3.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "nodemon": "^1.19.0",
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.20.3",
+    "src": "^1.1.2",
+    "tape": "^4.10.1"
+  }
+}
