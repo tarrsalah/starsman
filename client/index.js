@@ -4,7 +4,6 @@ import { Button } from "reactstrap";
 import Header from "./components/Header.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.css";
 
 const App = () => {
   return (
