@@ -2,3 +2,4 @@
 /yarn-error.log
 /public/*
 !public/index.html
+/.cache/
