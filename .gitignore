@@ -3,3 +3,4 @@
 /public/*
 !public/index.html
 /.cache/
+/client/components/.tern-port

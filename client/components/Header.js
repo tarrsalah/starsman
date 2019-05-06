@@ -1,19 +1,31 @@
-import React, { useState } from "react";
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import React from "react";
 
 export default () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <Navbar color="light" light>
+    <nav
+      className="navbar has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="container">
-        <NavbarBrand href="/">✨ Starsman</NavbarBrand>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink href="/login">👤 Sign in</NavLink>
-          </NavItem>
-        </Nav>
+        <div className="navbar-brand">
+          <a className="navbar-item" href="/">
+            <strong className="is-size-5">✨ Starsman</strong>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <a className="button is-dark">
+                  <strong> Log in</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </Navbar>
+    </nav>
   );
 };

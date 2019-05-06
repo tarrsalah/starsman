@@ -80,20 +80,6 @@ const start = async () => {
 
   server.route({
     method: "GET",
-    path: "/",
-    options: {
-      auth: {
-        strategy: "session",
-        mode: "optional"
-      },
-      handler: (request, h) => {
-        return "index, authenticated " + request.auth.isAuthenticated;
-      }
-    }
-  });
-
-  server.route({
-    method: "GET",
     path: "/api",
     options: {
       auth: {

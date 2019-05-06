@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon server index.js",
+    "start": "nodemon --watch server server/index.js",
     "test": "tape tests/**/*.js",
     "dev": "parcel watch ./client/index.js -o bundle -d ./public",
     "build": "parcel build ./client/index.js -o bundle -d ./public"
@@ -10,11 +10,10 @@
     "@hapi/cookie": "^10.1.0",
     "@hapi/hapi": "^18.3.1",
     "@hapi/inert": "^5.2.0",
-    "bootstrap": "^4.3.1",
+    "bulma": "^0.7.4",
     "graphql.js": "^0.6.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "reactstrap": "^8.0.0"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.0",
