@@ -4,3 +4,4 @@
 !public/index.html
 /.cache/
 /client/components/.tern-port
+.tern-port

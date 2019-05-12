@@ -21,9 +21,10 @@ const start = async () => {
       name: "sid",
       password: "GQT0QEMI0QKFH0KN48QABSSIHON8H6RP",
       isSecure: false,
+      path: "/",
       isSameSite: "Lax"
     },
-    redirectTo: "/auth"
+    redirectTo: false
   });
 
   server.auth.strategy("github", "bell", {
@@ -35,27 +36,23 @@ const start = async () => {
   });
 
   server.route({
-    method: ["GET", "POST"],
-    path: "/auth",
+    method: ["GET"],
+    path: "/auth/github",
     options: {
-      auth: "github",
       handler: async (request, h) => {
-        request.cookieAuth.set(request.auth.credentials);
-        return h.redirect("/");
+        return h.redirect("/auth/github/callback");
       }
     }
   });
 
   server.route({
-    method: ["GET"],
-    path: "/login",
+    method: ["GET", "POST"],
+    path: "/auth/github/callback",
     options: {
-      auth: {
-        strategy: "session",
-        mode: "required"
-      },
-      handler: async request => {
-        return "login";
+      auth: "github",
+      handler: async (request, h) => {
+        request.cookieAuth.set(request.auth.credentials);
+        return h.redirect("/");
       }
     }
   });
@@ -84,11 +81,10 @@ const start = async () => {
     options: {
       auth: {
         strategy: "session",
-        mode: "optional"
+        mode: "required"
       },
       handler: (request, h) => {
-        console.log(request.auth.isAuthenticated);
-        return "hello";
+        return request.auth.credentials;
       }
     }
   });

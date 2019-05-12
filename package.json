@@ -12,10 +12,17 @@
     "@hapi/inert": "^5.2.0",
     "bulma": "^0.7.4",
     "graphql.js": "^0.6.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "nodemon": "^1.19.0",
     "parcel-bundler": "^1.12.3",
     "tape": "^4.10.1"
