@@ -10,11 +10,12 @@
     "@hapi/cookie": "^10.1.0",
     "@hapi/hapi": "^18.3.1",
     "@hapi/inert": "^5.2.0",
-    "bulma": "^0.7.4",
+    "bootstrap": "^4.3.1",
     "graphql.js": "^0.6.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "reactstrap": "^8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -25,6 +26,7 @@
     "babel-preset-react": "^6.24.1",
     "nodemon": "^1.19.0",
     "parcel-bundler": "^1.12.3",
+    "sass": "^1.20.3",
     "tape": "^4.10.1"
   }
 }

@@ -1,40 +1,45 @@
 import React, { Component } from "react";
+import {
+  Button,
+  Container,
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 
 const Profile = ({ user }) => {
   return (
-    <div className="navbar-item has-dropdown is-hoverable">
-      <a className="navbar-link">
-        <figure className="image" style={{ marginRight: "1em" }}>
-          <img
-            className="is-rounded"
-            src={user.raw.avatar_url}
-            alt="tarrsalah"
-          />
-        </figure>
+    <UncontrolledDropdown nav inNavbar>
+      <DropdownToggle nav caret>
+        <img
+          width="40px"
+          src={user.raw.avatar_url}
+          class="rounded-circle mr-2"
+        />
         {user.username}
-      </a>
-      <div className="navbar-dropdown">
-        <a href="/settings" className="navbar-item">
-          Settings
-        </a>
-        <a href="/logout" className="navbar-item">
-          Logout
-        </a>
-      </div>
-    </div>
+      </DropdownToggle>
+      <DropdownMenu right>
+        <DropdownItem>
+          <NavLink href="/setting">Settings</NavLink>
+        </DropdownItem>
+        <DropdownItem>
+          <NavLink href="/logout">Logout</NavLink>
+        </DropdownItem>
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 };
 
 const Login = () => {
-  return (
-    <div className="navbar-item">
-      <div className="buttons">
-        <a className="button is-link" href="/auth/github">
-          <strong>Login</strong>
-        </a>
-      </div>
-    </div>
-  );
+  return <NavLink href="/auth/github">Login</NavLink>;
 };
 
 class Header extends Component {
@@ -80,29 +85,19 @@ class Header extends Component {
   render() {
     console.log(this.state);
     return (
-      <nav
-        className="navbar has-shadow is-light"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container is-family-monospace">
-          <div className="navbar-brand">
-            <a className="navbar-item" href="/">
-              <strong className="is-size-5">✨ Starsman</strong>
-            </a>
-          </div>
+      <Navbar color="dark" dark expand="md">
+        <Container>
+          <NavbarBrand href="/">✨ Starsman</NavbarBrand>
 
-          <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-end">
-              {this.state.isAuthenticated ? (
-                <Profile user={this.state.user} />
-              ) : (
-                <Login />
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
+          <Nav className="ml-auto" navbar>
+            {this.state.isAuthenticated ? (
+              <Profile user={this.state.user} />
+            ) : (
+              <Login />
+            )}
+          </Nav>
+        </Container>
+      </Navbar>
     );
   }
 }
