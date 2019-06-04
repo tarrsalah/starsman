@@ -1,5 +1,6 @@
 const path = require("path");
 const Hapi = require("@hapi/hapi");
+const client = require("./client");
 
 const start = async () => {
   const server = Hapi.server({
@@ -86,6 +87,22 @@ const start = async () => {
       handler: (request, h) => {
         return request.auth.credentials;
       }
+    }
+  });
+
+  server.route({
+    method: "GET",
+    path: "/api/starred",
+    options: {
+      auth: {
+        strategy: "session",
+        mode: "required"
+      }
+    },
+    handler: async (request, h) => {
+      const token = request.auth.credentials.token;
+      const repos = await client.getStarredRepos(token, 20);
+      return h.response(repos);
     }
   });
 
