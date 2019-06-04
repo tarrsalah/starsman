@@ -1,10 +1,8 @@
 @import "~bootstrap/scss/_functions.scss";
 @import "~bootstrap/scss/_variables.scss";
 
-// Add your custom variables here
+$font-family-base: $font-family-monospace;
 $dropdown-link-color: $dark;
-
-@import "~bootstrap/scss/bootstrap.scss";
 
 .dropdown-item:active {
   background-color: $light;
@@ -15,3 +13,9 @@ $dropdown-link-color: $dark;
 .navbar-dark .dropdown-menu .dropdown-item .nav-link:focus {
   color: $dark;
 }
+
+html {
+  font-size: 14px;
+}
+
+@import "~bootstrap/scss/bootstrap.scss";

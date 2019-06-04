@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import {
-  Button,
   Container,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
+  Navbar,
+  NavbarBrand,
   NavItem,
   NavLink,
   UncontrolledDropdown,
@@ -20,9 +17,9 @@ const Profile = ({ user }) => {
     <UncontrolledDropdown nav inNavbar>
       <DropdownToggle nav caret>
         <img
-          width="40px"
+          width="30px"
           src={user.raw.avatar_url}
-          class="rounded-circle mr-2"
+          className="rounded-circle mr-2"
         />
         {user.username}
       </DropdownToggle>
@@ -83,7 +80,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <Navbar color="dark" dark expand="md">
         <Container>
