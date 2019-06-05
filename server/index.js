@@ -78,14 +78,21 @@ const start = async () => {
 
   server.route({
     method: "GET",
-    path: "/api",
+    path: "/api/user",
     options: {
       auth: {
         strategy: "session",
         mode: "required"
       },
       handler: (request, h) => {
-        return request.auth.credentials;
+        let profile = request.auth.credentials.profile;
+        let user = {
+          id: profile.id,
+          username: profile.username,
+          avatar_url: profile.raw.avatar_url
+        };
+
+        return user;
       }
     }
   });
