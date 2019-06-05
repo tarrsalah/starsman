@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "reactstrap";
-import Repository from "./Repository";
+import Repository from "./Repository.js";
 
 const Repositories = ({ repositories }) => {
   return (
