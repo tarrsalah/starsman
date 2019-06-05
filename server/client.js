@@ -8,10 +8,9 @@ query starred($perPage: Int!) {
     name
     starredRepositories(first: $perPage, orderBy: {field: STARRED_AT, direction: DESC}) {
       edges {
-        cursor
         node {
           id
-          name
+          nameWithOwner
           primaryLanguage {
             id
             name
@@ -28,6 +27,16 @@ query starred($perPage: Int!) {
 }
 `;
 
+function fromGraphqlResponse(responseJson) {
+  let flat = responseJson["data"]["viewer"]["starredRepositories"];
+  let repos = flat["edges"].map(repo => {
+    return repo.node;
+  });
+  let pageInfo = flat["pageInfo"];
+
+  return { repos, pageInfo };
+}
+
 function getStarredRepos(token, perPage) {
   return new Promise(async (resolve, reject) => {
     let variables = { perPage };
@@ -42,8 +51,9 @@ function getStarredRepos(token, perPage) {
 
     try {
       let response = await fetch(API_URL, options);
-      let data = await response.json();
-      resolve(data);
+      let responseJson = await response.json();
+
+      resolve(fromGraphqlResponse(responseJson));
     } catch (err) {
       console.log(err);
       reject(err);
