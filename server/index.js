@@ -108,7 +108,7 @@ const start = async () => {
     },
     handler: async (request, h) => {
       const token = request.auth.credentials.token;
-      const repos = await client.getStarredRepos(token, 20);
+      const repos = await client.getStarredRepos(token, 100);
       return h.response(repos);
     }
   });

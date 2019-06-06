@@ -6,9 +6,17 @@ import Repositories from "./Repositories.js";
 
 class App extends Component {
   state = {
-    isAuthenticated: false,
-    user: {},
-    starredRepos: []
+    auth: {
+      isLoading: false,
+      error: false,
+      isAuthenticated: false,
+      user: {}
+    },
+    starredRepos: {
+      isLoading: false,
+      error: false,
+      repos: []
+    }
   };
 
   constructor(props) {
@@ -18,18 +26,67 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        auth: {
+          ...prevState.auth,
+          isLoading: true
+        }
+      };
+    });
+
     try {
       let user = await this.fetchUser();
-      this.setState({ isAuthenticated: true, user });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          auth: {
+            ...prevState.auth,
+            isLoading: false,
+            isAuthenticated: true,
+            user
+          }
+        };
+      });
     } catch (err) {
-      this.setState({ isAuthenticated: false });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          auth: { ...prevState.auth, isAuthenticated: false }
+        };
+      });
     }
 
     try {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          starredRepos: {
+            ...prevState.starredRepos,
+            isLoading: true
+          }
+        };
+      });
+
       let starredRepos = await this.fetchStarredRepos();
-      this.setState({ starredRepos: starredRepos.repos });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          starredRepos: {
+            ...prevState.starredRepos,
+            repos: starredRepos.repos,
+            isLoading: false
+          }
+        };
+      });
     } catch (err) {
-      this.setState({ isAuthenticated: false, starredRepos: [] });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          starredRepos: { ...prevState.starredRepos, error: true }
+        };
+      });
     }
   }
 
@@ -62,9 +119,6 @@ class App extends Component {
     };
     try {
       let response = await fetch("http://localhost:3000/api/starred", options);
-      if (response.status != 200) {
-        return Promise.reject(response);
-      }
       return response.json();
     } catch (err) {
       return Promise.reject(err);
@@ -72,13 +126,12 @@ class App extends Component {
   }
 
   render() {
+    const { auth, starredRepos } = this.state;
+
     return (
       <React.Fragment>
-        <Navbar
-          user={this.state.user}
-          isAuthenticated={this.state.isAuthenticated}
-        />
-        <Repositories repositories={this.state.starredRepos} />
+        <Navbar auth={auth} />
+        <Repositories starredRepos={starredRepos} />
       </React.Fragment>
     );
   }

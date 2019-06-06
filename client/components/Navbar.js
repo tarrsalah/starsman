@@ -40,7 +40,8 @@ function Login() {
   return <NavLink href="/auth/github">Login</NavLink>;
 }
 
-function Header({ isAuthenticated, user }) {
+function Header({ auth }) {
+  const { isAuthenticated, user } = auth;
   return (
     <Navbar color="dark" dark expand="md">
       <Container>
