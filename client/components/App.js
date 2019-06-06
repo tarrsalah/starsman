@@ -9,8 +9,8 @@ class App extends Component {
     auth: {
       isLoading: false,
       error: false,
-      isAuthenticated: false,
-      user: {}
+      user: {},
+      isAuthenticated: false
     },
     starredRepos: {
       isLoading: false,
@@ -53,7 +53,12 @@ class App extends Component {
       this.setState(prevState => {
         return {
           ...prevState,
-          auth: { ...prevState.auth, isAuthenticated: false }
+          auth: {
+            ...prevState.auth,
+            isAuthenticated: false,
+            error: true,
+            isLoading: false
+          }
         };
       });
     }
@@ -84,7 +89,11 @@ class App extends Component {
       this.setState(prevState => {
         return {
           ...prevState,
-          starredRepos: { ...prevState.starredRepos, error: true }
+          starredRepos: {
+            ...prevState.starredRepos,
+            error: true,
+            isLoading: false
+          }
         };
       });
     }
@@ -119,6 +128,9 @@ class App extends Component {
     };
     try {
       let response = await fetch("http://localhost:3000/api/starred", options);
+      if (response.status != 200) {
+        return Promise.reject(response);
+      }
       return response.json();
     } catch (err) {
       return Promise.reject(err);
