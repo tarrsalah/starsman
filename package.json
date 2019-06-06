@@ -11,11 +11,11 @@
     "@hapi/hapi": "^18.3.1",
     "@hapi/inert": "^5.2.0",
     "bootstrap": "^4.3.1",
-    "graphql.js": "^0.6.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "reactstrap": "^8.0.0"
+    "reactstrap": "^8.0.0",
+    "sqlite": "^3.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

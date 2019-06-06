@@ -5,3 +5,4 @@
 /.cache/
 /client/components/.tern-port
 .tern-port
+/database.sqlite

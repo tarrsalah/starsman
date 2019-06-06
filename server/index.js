@@ -1,6 +1,13 @@
 const path = require("path");
 const Hapi = require("@hapi/hapi");
 const client = require("./client");
+const sqlite = require("sqlite");
+
+const db = Promise.resolve()
+  .then(() => sqlite.open("./database.sqlite", { Promise }))
+  .then(db =>
+    db.migrate({ force: "last", migrationsPath: "./server/migrations" })
+  );
 
 const start = async () => {
   const server = Hapi.server({
