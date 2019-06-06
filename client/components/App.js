@@ -7,12 +7,14 @@ import Repositories from "./Repositories.js";
 class App extends Component {
   state = {
     isAuthenticated: false,
-    user: {}
+    user: {},
+    starredRepos: []
   };
 
   constructor(props) {
     super(props);
     this.fetchUser = this.fetchUser.bind(this);
+    this.fetchStarredRepos = this.fetchStarredRepos.bind(this);
   }
 
   async componentDidMount() {
@@ -21,6 +23,13 @@ class App extends Component {
       this.setState({ isAuthenticated: true, user });
     } catch (err) {
       this.setState({ isAuthenticated: false });
+    }
+
+    try {
+      let starredRepos = await this.fetchStarredRepos();
+      this.setState({ starredRepos: starredRepos.repos });
+    } catch (err) {
+      this.setState({ isAuthenticated: false, starredRepos: [] });
     }
   }
 
@@ -43,23 +52,33 @@ class App extends Component {
     }
   }
 
-  render() {
-    let repositories = [
-      {
-        id: 1,
-        link: "https://github.com/primer/octicons",
-        name: "primer/octicons",
-        description: "A scalable set of icons handcrafted with <3 by GitHub "
+  async fetchStarredRepos() {
+    let options = {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
       }
-    ];
+    };
+    try {
+      let response = await fetch("http://localhost:3000/api/starred", options);
+      if (response.status != 200) {
+        return Promise.reject(response);
+      }
+      return response.json();
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 
+  render() {
     return (
       <React.Fragment>
         <Navbar
           user={this.state.user}
           isAuthenticated={this.state.isAuthenticated}
         />
-        <Repositories repositories={repositories} />
+        <Repositories repositories={this.state.starredRepos} />
       </React.Fragment>
     );
   }

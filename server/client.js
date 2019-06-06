@@ -11,6 +11,8 @@ query starred($perPage: Int!) {
         node {
           id
           nameWithOwner
+          description
+          url
           primaryLanguage {
             id
             name

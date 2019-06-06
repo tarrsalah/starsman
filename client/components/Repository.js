@@ -1,12 +1,12 @@
 import React from "react";
 
 const Repository = ({ repository }) => {
-  const { name, link, description } = repository;
+  const { nameWithOwner, url, description } = repository;
   return (
     <div className="p-2 border-bottom">
       <div>
         <h3 className="h4">
-          <a href={link}>{name}</a>
+          <a href={url}>{nameWithOwner}</a>
         </h3>
       </div>
       <p>{description}</p>
