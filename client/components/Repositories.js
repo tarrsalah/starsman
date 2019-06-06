@@ -6,7 +6,7 @@ const Repositories = ({ starredRepos }) => {
   const { repos, isLoading } = starredRepos;
   return (
     <Container className="px-5 mt-4">
-      <h2 className="h6 text-uppercase mb-3">
+      <h2 className="h6 font-weight-bold text-uppercase mb-3">
         <span className="mr-2">Repositories</span>
         {isLoading && (
           <Spinner

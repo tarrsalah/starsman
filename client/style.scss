@@ -2,20 +2,13 @@
 @import "~bootstrap/scss/_variables.scss";
 
 $font-family-base: $font-family-monospace;
-$dropdown-link-color: $dark;
-
-.dropdown-item:active {
-  background-color: $light;
-}
-
-.navbar-dark .dropdown-menu .dropdown-item .nav-link,
-.navbar-dark .dropdown-menu .dropdown-item .nav-link:hover,
-.navbar-dark .dropdown-menu .dropdown-item .nav-link:focus {
-  color: $dark;
-}
 
 html {
   font-size: 14px;
 }
+
+$container-max-widths: (
+  xl: 920px
+);
 
 @import "~bootstrap/scss/bootstrap.scss";

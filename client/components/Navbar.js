@@ -43,7 +43,7 @@ function Login() {
 function Header({ auth }) {
   const { isAuthenticated, user } = auth;
   return (
-    <Navbar color="dark" dark expand="md">
+    <Navbar color="light" light expand="md">
       <Container>
         <NavbarBrand href="/">✨ Starsman</NavbarBrand>
         <Nav className="ml-auto" navbar>
