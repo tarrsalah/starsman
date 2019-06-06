@@ -7,20 +7,17 @@ const Repositories = ({ starredRepos }) => {
   return (
     <Container className="px-5 mt-4">
       <h2 className="h6 text-uppercase mb-3">
-        <strong>Repositories</strong>
-      </h2>
-      {!isLoading ? (
-        repos.map(repository => (
-          <Repository key={repository.id} repository={repository} />
-        ))
-      ) : (
-        <div className="mt-3 row justify-content-center align-items-center">
+        <span className="mr-2">Repositories</span>
+        {isLoading && (
           <Spinner
             color="secondary"
-            style={{ width: "4rem", height: "4rem" }}
+            style={{ width: "1.5em", height: "1.5em" }}
           />
-        </div>
-      )}
+        )}
+      </h2>
+      {repos.map(repository => (
+        <Repository key={repository.id} repository={repository} />
+      ))}
     </Container>
   );
 };
