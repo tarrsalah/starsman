@@ -1,4 +1,4 @@
-require("isomorphic-fetch");
+import fetch from "isomorphic-fetch";
 const API_URL = "https://api.github.com/graphql";
 
 const starredReposQuery = `
@@ -63,4 +63,4 @@ function getStarredRepos(token, perPage) {
   });
 }
 
-module.exports = { getStarredRepos };
+export default { getStarredRepos };

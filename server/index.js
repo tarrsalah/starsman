@@ -1,7 +1,7 @@
-const path = require("path");
-const Hapi = require("@hapi/hapi");
-const client = require("./client");
-const sqlite = require("sqlite");
+import path from "path";
+import Hapi from "@hapi/hapi";
+import client from "./client.js";
+import sqlite from "sqlite";
 
 const db = Promise.resolve()
   .then(() => sqlite.open("./database.sqlite", { Promise }))

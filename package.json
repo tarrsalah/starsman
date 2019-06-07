@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon --watch server server/index.js",
+    "start": "nodemon -r @babel/register --watch server server/index.js",
     "test": "tape tests/**/*.js",
     "dev": "parcel watch ./client/index.js -o bundle -d ./public",
     "build": "parcel build ./client/index.js -o bundle -d ./public"
@@ -24,9 +24,11 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "nodemon": "^1.19.0",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.20.3",
+    "src": "^1.1.2",
     "tape": "^4.10.1"
   }
 }
