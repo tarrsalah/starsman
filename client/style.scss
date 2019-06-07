@@ -2,13 +2,25 @@
 @import "~bootstrap/scss/_variables.scss";
 
 $font-family-base: $font-family-monospace;
-
-html {
-  font-size: 14px;
-}
+$font-size-base: 0.9rem;
 
 $container-max-widths: (
   xl: 920px
 );
 
 @import "~bootstrap/scss/bootstrap.scss";
+
+span.badge {
+  display: inline-block;
+  padding: 0.4em 0.6em;
+  margin-right: 5px;
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

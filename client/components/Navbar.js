@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import {
+  Button,
   Container,
   Nav,
   Navbar,
@@ -46,6 +47,13 @@ function Header({ auth }) {
     <Navbar color="light" light expand="md">
       <Container>
         <NavbarBrand href="/">✨ Starsman</NavbarBrand>
+        <Nav navbar>
+          <NavItem>
+            <NavLink href="#" style={{ lineHeight: "30px", fontSize: "1.2em" }}>
+              📥 Sync
+            </NavLink>
+          </NavItem>
+        </Nav>
         <Nav className="ml-auto" navbar>
           {isAuthenticated ? <Profile user={user} /> : <Login />}
         </Nav>

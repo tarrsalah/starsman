@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import fetch from "isomorphic-fetch";
 
+import { Container, Row, Col } from "reactstrap";
 import Navbar from "./Navbar.js";
 import Repositories from "./Repositories.js";
+import Tags from "./Tags.js";
 
 class App extends Component {
   state = {
@@ -140,10 +142,24 @@ class App extends Component {
   render() {
     const { auth, starredRepos } = this.state;
 
+    const tags = [
+      { id: 0, text: "backend", color: "blue", count: 20 },
+      { id: 1, text: "privacy", color: "black", count: 30 },
+      { id: 2, text: "node", color: "yellow", count: 7 }
+    ];
     return (
       <React.Fragment>
         <Navbar auth={auth} />
-        <Repositories starredRepos={starredRepos} />
+        <Container className="my-4">
+          <Row>
+            <Col xs="8">
+              <Repositories starredRepos={starredRepos} />
+            </Col>
+            <Col>
+              <Tags tags={tags} loading={false} />
+            </Col>
+          </Row>
+        </Container>
       </React.Fragment>
     );
   }

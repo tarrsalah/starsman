@@ -1,13 +1,13 @@
-import React from "react";
-import { Container, Spinner } from "reactstrap";
+import React, { Fragment } from "react";
+import { Spinner } from "reactstrap";
 import Repository from "./Repository.js";
 
 const Repositories = ({ starredRepos }) => {
   const { repos, isLoading } = starredRepos;
   return (
-    <Container className="px-5 mt-4">
-      <h2 className="h6 font-weight-bold text-uppercase mb-3">
-        <span className="mr-2">Repositories</span>
+    <Fragment>
+      <h2 className="h5 font-weight-bolder mb-3">
+        <span className="mr-2">📄 Repositories</span>
         {isLoading && (
           <Spinner
             color="secondary"
@@ -18,7 +18,7 @@ const Repositories = ({ starredRepos }) => {
       {repos.map(repository => (
         <Repository key={repository.id} repository={repository} />
       ))}
-    </Container>
+    </Fragment>
   );
 };
 
