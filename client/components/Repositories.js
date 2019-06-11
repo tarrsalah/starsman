@@ -7,12 +7,9 @@ const Repositories = ({ starredRepos }) => {
   return (
     <Fragment>
       <h2 className="h4 font-weight-bolder mb-4">
-        <span className="mr-2">📄 Repositories</span>
+        <span className="mr-4">📄 Repositories</span>
         {isLoading && (
-          <Spinner
-            color="secondary"
-            style={{ width: "1.5em", height: "1.5em" }}
-          />
+          <Spinner color="secondary" style={{ width: "1em", height: "1em" }} />
         )}
       </h2>
       {repos.map(repository => (
