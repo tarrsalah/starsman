@@ -1,33 +1,34 @@
 import fetch from "isomorphic-fetch";
 const API_URL = "https://api.github.com/graphql";
 
-const starredReposQuery = `
-query starred($perPage: Int!) {
-  viewer {
-    login
-    name
-    starredRepositories(first: $perPage, orderBy: {field: STARRED_AT, direction: DESC}) {
-      edges {
-        node {
-          id
-          nameWithOwner
-          description
-          url
-          primaryLanguage {
-            id
+function getQuery(perPage = 10, afterCursor) {
+  afterCursor = afterCursor ? `after:"${afterCursor}"` : "after:null";
+  return `query  {
+            viewer {
+    	    login
             name
-            color
+            starredRepositories(first: ${perPage}, orderBy: {field: STARRED_AT, direction: DESC}, ${afterCursor}) {
+              edges {
+                node {
+                  id
+                  nameWithOwner
+                  description
+                  url
+                  primaryLanguage {
+                    id
+                    name
+                   color
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+            }
           }
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-    }
-  }
+        }`;
 }
-`;
 
 function fromGraphqlResponse(responseJson) {
   let flat = responseJson["data"]["viewer"]["starredRepositories"];
@@ -39,16 +40,15 @@ function fromGraphqlResponse(responseJson) {
   return { repos, pageInfo };
 }
 
-function getStarredRepos(token, perPage) {
+function getStarredRepos(token, perPage, afterCursor) {
   return new Promise(async (resolve, reject) => {
-    let variables = { perPage };
-    let query = starredReposQuery;
+    let query = getQuery(perPage, afterCursor);
     let options = {
       headers: {
         Authorization: "Bearer " + token
       },
       method: "POST",
-      body: JSON.stringify({ query, variables })
+      body: JSON.stringify({ query })
     };
 
     try {
