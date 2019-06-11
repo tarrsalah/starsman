@@ -1,8 +1,9 @@
 import path from "path";
-import Hapi from "@hapi/hapi";
-import client from "./client.js";
 import sqlite from "sqlite";
+import Hapi from "@hapi/hapi";
+
 import auth from "./auth.js";
+import api from "./api";
 
 const db = Promise.resolve()
   .then(() => sqlite.open("./database.sqlite", { Promise }))
@@ -22,43 +23,7 @@ const start = async () => {
   });
   await server.register(require("@hapi/inert"));
   await server.register(auth);
-
-  server.route({
-    method: "GET",
-    path: "/api/user",
-    options: {
-      auth: {
-        strategy: "session",
-        mode: "required"
-      },
-      handler: (request, h) => {
-        let profile = request.auth.credentials.profile;
-        let user = {
-          id: profile.id,
-          username: profile.username,
-          avatar_url: profile.raw.avatar_url
-        };
-
-        return user;
-      }
-    }
-  });
-
-  server.route({
-    method: "GET",
-    path: "/api/starred",
-    options: {
-      auth: {
-        strategy: "session",
-        mode: "required"
-      }
-    },
-    handler: async (request, h) => {
-      const token = request.auth.credentials.token;
-      const repos = await client.getStarredRepos(token, 100);
-      return h.response(repos);
-    }
-  });
+  await server.register(api);
 
   server.route({
     method: "GET",
