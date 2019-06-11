@@ -143,9 +143,9 @@ class App extends Component {
     const { auth, starredRepos } = this.state;
 
     const tags = [
-      { id: 0, text: "backend", color: "blue", count: 20 },
-      { id: 1, text: "privacy", color: "black", count: 30 },
-      { id: 2, text: "node", color: "yellow", count: 7 }
+      { id: 0, text: "backend", count: 20 },
+      { id: 1, text: "privacy", count: 30 },
+      { id: 2, text: "node", count: 7 }
     ];
     return (
       <React.Fragment>
