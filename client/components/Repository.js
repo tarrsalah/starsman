@@ -9,7 +9,7 @@ const Repository = ({ repository }) => {
           <a href={url}>{nameWithOwner}</a>
         </h3>
       </div>
-      <p>{description}</p>
+      <p className="text-secondary">{description}</p>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Tag from "./Tag.js";
 function Tags({ tags, loading }) {
   return (
     <Fragment>
-      <h2 className="h5 font-weight-bolder mb-3">
+      <h2 className="h4 font-weight-bolder mb-3">
         <span className="mr-2">🔖 Tags</span>
         {loading && (
           <Spinner
