@@ -15,7 +15,7 @@ class App extends Component {
       isAuthenticated: false
     },
     starredRepos: {
-      isLoading: false,
+      isLoading: true,
       error: false,
       repos: []
     }
