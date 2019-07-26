@@ -1,15 +1,8 @@
 import path from "path";
-import sqlite from "sqlite";
 import Hapi from "@hapi/hapi";
 
 import auth from "./auth.js";
 import api from "./api";
-
-const db = Promise.resolve()
-  .then(() => sqlite.open("./database.sqlite", { Promise }))
-  .then(db =>
-    db.migrate({ force: "last", migrationsPath: "./server/migrations" })
-  );
 
 const start = async () => {
   const server = Hapi.server({

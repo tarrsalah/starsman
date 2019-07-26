@@ -9,7 +9,7 @@ import Tags from "./Tags.js";
 class App extends Component {
   state = {
     auth: {
-      isLoading: false,
+      isLoading: true,
       error: false,
       user: {},
       isAuthenticated: false

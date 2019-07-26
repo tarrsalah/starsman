@@ -1,5 +1,6 @@
 import hapiCookie from "@hapi/cookie";
 import hapiBell from "@hapi/bell";
+import { storeUser } from "./db.js";
 
 const auth = {
   name: "auth",
@@ -41,7 +42,13 @@ const auth = {
       options: {
         auth: "github",
         handler: async (request, h) => {
-          request.cookieAuth.set(request.auth.credentials);
+          let credentials = request.auth.credentials;
+          await storeUser({
+            username: credentials.profile.username,
+            github_id: credentials.profile.id
+          });
+
+          request.cookieAuth.set(credentials);
           return h.redirect("/");
         }
       }
