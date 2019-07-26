@@ -2,7 +2,8 @@
 CREATE TABLE stars(
     id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    repo_id STRING NOT NULL
+    repo_id STRING NOT NULL,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Down
