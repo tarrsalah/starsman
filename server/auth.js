@@ -43,7 +43,9 @@ const auth = {
         auth: "github",
         handler: async (request, h) => {
           let credentials = request.auth.credentials;
-          await storeUser({
+          let db = request.server.app.db;
+
+          await storeUser(db, {
             username: credentials.profile.username,
             github_id: credentials.profile.id
           });
