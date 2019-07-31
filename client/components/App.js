@@ -152,11 +152,12 @@ class App extends Component {
         <Navbar auth={auth} />
         <Container className="my-4">
           <Row>
-            <Col xs="8">
-              <Repositories starredRepos={starredRepos} />
-            </Col>
             <Col>
               <Tags tags={tags} loading={false} />
+            </Col>
+
+            <Col md="8">
+              <Repositories starredRepos={starredRepos} />
             </Col>
           </Row>
         </Container>
