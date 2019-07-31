@@ -15,7 +15,7 @@ export async function storeUser(db, user) {
   }
 }
 
-export async function storeStarredRepository(db, userId, repoId) {
+export async function starRopository(db, userId, repoId) {
   try {
     db.exec("BEGIN TRANSACTION");
     await db.exec(

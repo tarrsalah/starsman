@@ -82,7 +82,7 @@ class App extends Component {
           ...prevState,
           starredRepos: {
             ...prevState.starredRepos,
-            repos: starredRepos.repos,
+            repos: starredRepos,
             isLoading: false
           }
         };

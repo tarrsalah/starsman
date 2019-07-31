@@ -11,9 +11,36 @@ function checkUser(request, h) {
   return user;
 }
 
+// get the current user's starred repositories
 async function getStars(request, h) {
+  const cache = request.server.app.cache;
+  const userId = request.auth.credentials.profile.id;
+
+  // is the user has a cached starred repositories
+  const cached = cache.get(userId);
+  if (cached) {
+    return h.response(cached);
+  }
+
+  // hit the github API
   const token = request.auth.credentials.token;
-  const repos = await github.getStarredRepos(token, 10);
+  let repos = [];
+
+  let hasNextPage = true;
+  let endCursor;
+
+  while (hasNextPage) {
+    let starredRepos = await github.getStarredRepos(token, 100, endCursor);
+
+    hasNextPage = starredRepos.pageInfo.hasNextPage;
+    endCursor = starredRepos.pageInfo.endCursor;
+
+    repos = repos.concat(starredRepos.repos);
+  }
+
+  // cache the result
+  cache.put(userId, repos, 1000 * 60 * 5);
+
   return h.response(repos);
 }
 

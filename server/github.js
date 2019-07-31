@@ -57,7 +57,6 @@ function getStarredRepos(token, perPage, afterCursor) {
 
       resolve(fromGraphqlResponse(responseJson));
     } catch (err) {
-      console.log(err);
       reject(err);
     }
   });
