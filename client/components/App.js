@@ -77,17 +77,7 @@ class App extends Component {
         };
       });
 
-      let starredRepos = await this.fetchStarredRepos();
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          starredRepos: {
-            ...prevState.starredRepos,
-            repos: starredRepos,
-            isLoading: false
-          }
-        };
-      });
+      await this.fetchStarredRepos();
     } catch (err) {
       this.setState(prevState => {
         return {
@@ -129,15 +119,63 @@ class App extends Component {
         "Content-Type": "application/json"
       }
     };
+
+    let url = "http://localhost:3000/api/starred";
+
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        starredRepos: {
+          ...prevState.starredRepos,
+          repos: [],
+          isLoading: true
+        }
+      };
+    });
+
     try {
-      let response = await fetch("http://localhost:3000/api/starred", options);
-      if (response.status != 200) {
-        return Promise.reject(response);
+      let hasNextPage = true;
+      let endCursor;
+
+      while (hasNextPage) {
+        let actualURL = url;
+        if (hasNextPage && endCursor) {
+          actualURL = actualURL + "?next=" + endCursor;
+        }
+
+        let response = await fetch(actualURL, options);
+
+        if (response.status != 200) {
+          return Promise.reject(response);
+        }
+
+        let json = await response.json();
+
+        hasNextPage = json.hasNextPage;
+        endCursor = json.endCursor;
+
+        this.setState(prevState => {
+          let starredRepos = prevState.starredRepos.repos;
+          starredRepos.push(...json.repos);
+
+          return {
+            ...prevState,
+            starredRepos: {
+              ...prevState.starredRepos,
+              repos: starredRepos
+            }
+          };
+        });
       }
-      return response.json();
     } catch (err) {
       return Promise.reject(err);
     }
+
+    let starredRepos = Object.assign({}, this.state.starredRepos);
+    starredRepos.isLoading = false;
+    this.setState({ starredRepos });
+
+    return Promise.resolve();
   }
 
   render() {

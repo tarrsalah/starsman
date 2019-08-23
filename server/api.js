@@ -15,33 +15,24 @@ function checkUser(request, h) {
 async function getStars(request, h) {
   const cache = request.server.app.cache;
   const userId = request.auth.credentials.profile.id;
-
-  // is the user has a cached starred repositories
-  const cached = cache.get(userId);
-  if (cached) {
-    return h.response(cached);
-  }
+  const next = request.query.next;
 
   // hit the github API
   const token = request.auth.credentials.token;
-  let repos = [];
 
-  let hasNextPage = true;
-  let endCursor;
+  let starredRepos = await github.getStarredRepos(token, 100, next);
 
-  while (hasNextPage) {
-    let starredRepos = await github.getStarredRepos(token, 100, endCursor);
+  let hasNextPage = starredRepos.pageInfo.hasNextPage;
+  let endCursor = starredRepos.pageInfo.endCursor;
+  let repos = starredRepos.repos;
 
-    hasNextPage = starredRepos.pageInfo.hasNextPage;
-    endCursor = starredRepos.pageInfo.endCursor;
+  let response = {
+    repos,
+    hasNextPage,
+    endCursor
+  };
 
-    repos = repos.concat(starredRepos.repos);
-  }
-
-  // cache the result
-  cache.put(userId, repos, 1000 * 60 * 10);
-
-  return h.response(repos);
+  return h.response(response);
 }
 
 async function sync(request, h) {
