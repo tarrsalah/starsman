@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { Spinner } from "reactstrap";
-import Tag from "./Tag.js";
+import Language from "./Language.js";
 
-function Tags({ tags, loading }) {
+function Languages({ languages, loading }) {
   return (
     <Fragment>
       <h2 className="h5 font-weight-bolder mb-3">
-        <span className="mr-2">🏷️ Tags</span>
+        <span className="mr-2">📈 Languages</span>
         {loading && (
           <Spinner
             color="secondary"
@@ -14,13 +14,13 @@ function Tags({ tags, loading }) {
           />
         )}
       </h2>
-      <div className="mb-5">
-        {tags.map(tag => (
-          <Tag key={tag.id} tag={tag} />
+      <ul>
+        {languages.map(language => (
+          <Language key={language.name} language={language} />
         ))}
-      </div>
+      </ul>
     </Fragment>
   );
 }
 
-export default Tags;
+export default Languages;

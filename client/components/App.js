@@ -5,6 +5,7 @@ import { Container, Row, Col } from "reactstrap";
 import Navbar from "./Navbar.js";
 import Repositories from "./Repositories.js";
 import Tags from "./Tags.js";
+import Languages from "./Languages.js";
 
 class App extends Component {
   state = {
@@ -147,6 +148,9 @@ class App extends Component {
       { id: 1, text: "privacy", count: 30 },
       { id: 2, text: "node", count: 7 }
     ];
+
+    const languages = [{ name: "Go", count: 120 }, { name: "PHP", count: 130 }];
+
     return (
       <React.Fragment>
         <Navbar auth={auth} />
@@ -154,6 +158,7 @@ class App extends Component {
           <Row>
             <Col>
               <Tags tags={tags} loading={false} />
+              <Languages languages={languages} loading={false} />
             </Col>
 
             <Col md="8">
