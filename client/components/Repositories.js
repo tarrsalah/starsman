@@ -6,12 +6,19 @@ const Repositories = ({ starredRepos }) => {
   const { repos, isLoading } = starredRepos;
   return (
     <Fragment>
-      <h2 className="h4 font-weight-bolder mb-4">
-        <span className="mr-4">📄 Repositories</span>
-        {isLoading && (
-          <Spinner color="secondary" style={{ width: "1em", height: "1em" }} />
-        )}
-      </h2>
+      <div>
+        <h1 className="h4 font-weight-bolder">
+          📄 Repositories
+          <span class="badge badge-light">({repos.length})</span>
+          {isLoading && (
+            <Spinner
+              className="ml-4"
+              color="secondary"
+              style={{ width: "1em", height: "1em" }}
+            />
+          )}
+        </h1>
+      </div>
       {repos.map(repository => (
         <Repository key={repository.id} repository={repository} />
       ))}

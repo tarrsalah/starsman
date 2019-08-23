@@ -6,7 +6,7 @@ function Language({ language }) {
   return (
     <li className="language">
       <span> {name}</span>
-      <span> {count}</span>
+      <span class="badge badge-light"> ({count})</span>
     </li>
   );
 }
