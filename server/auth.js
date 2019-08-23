@@ -1,6 +1,5 @@
 import hapiCookie from "@hapi/cookie";
 import hapiBell from "@hapi/bell";
-import { storeUser } from "./db.js";
 
 const auth = {
   name: "auth",
@@ -45,7 +44,7 @@ const auth = {
           let credentials = request.auth.credentials;
           let db = request.server.app.db;
 
-          await storeUser(db, {
+          await db.storeUser({
             username: credentials.profile.username,
             github_id: credentials.profile.id
           });

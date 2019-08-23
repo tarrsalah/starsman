@@ -1,4 +1,13 @@
-export async function storeUser(db, user) {
+import sqlite from "sqlite";
+
+const dbPromise = Promise.resolve()
+  .then(() => sqlite.open("./database.sqlite", { Promise }))
+  .then(db =>
+    db.migrate({ force: "last", migrationsPath: "./server/migrations" })
+  );
+
+async function storeUser(user) {
+  let db = await dbPromise;
   let { username, github_id } = user;
   try {
     await db.exec("BEGIN TRANSACTION;");
@@ -15,7 +24,8 @@ export async function storeUser(db, user) {
   }
 }
 
-export async function starRopository(db, userId, repoId) {
+async function starRopository(userId, repoId) {
+  let db = await dbPromise;
   try {
     db.exec("BEGIN TRANSACTION");
     await db.exec(
@@ -29,3 +39,15 @@ export async function starRopository(db, userId, repoId) {
     await db.exec("ROLLBACK");
   }
 }
+
+const db = {
+  name: "db",
+  register: function(server, options) {
+    server.app.db = {
+      storeUser,
+      starRopository
+    };
+  }
+};
+
+export default db;

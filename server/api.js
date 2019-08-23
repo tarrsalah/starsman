@@ -39,7 +39,7 @@ async function getStars(request, h) {
   }
 
   // cache the result
-  cache.put(userId, repos, 1000 * 60 * 5);
+  cache.put(userId, repos, 1000 * 60 * 10);
 
   return h.response(repos);
 }
