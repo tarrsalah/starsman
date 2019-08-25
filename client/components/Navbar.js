@@ -61,7 +61,7 @@ function Header({ auth }) {
 
         <Nav navbar>
           <NavItem>
-            <NavLink href="#" style={{ lineHeight: "30px", fontSize: "1.2em" }}>
+            <NavLink href="/" style={{ lineHeight: "30px", fontSize: "1.2em" }}>
               📥 Sync
             </NavLink>
           </NavItem>

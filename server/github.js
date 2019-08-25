@@ -14,6 +14,10 @@ function getQuery(perPage = 10, afterCursor) {
                   nameWithOwner
                   description
                   url
+                  stargazers {
+                    totalCount
+                  }
+                  forkCount
                   primaryLanguage {
                     id
                     name
