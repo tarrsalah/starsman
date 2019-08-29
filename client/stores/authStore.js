@@ -15,12 +15,18 @@ class AuthStore {
     };
     try {
       let response = await fetch("http://localhost:3000/api/user", options);
+      let user = await response.json();
+
       if (response.status == 200) {
-        this.user = await response.json();
-        this.isAuthenticated = true;
+        runInAction(() => {
+          this.user = user;
+          this.isAuthenticated = true;
+        });
       }
     } catch (err) {
-      this.isAuthenticated = false;
+      runInAction(() => {
+        this.isAuthenticated = false;
+      });
     }
   }
 }
