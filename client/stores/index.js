@@ -1,7 +1,9 @@
 import repositoriesStore from "./repositoriesStore.js";
+import authStore from "./authStore.js";
 
 const stores = {
-  repositoriesStore
+  repositoriesStore,
+  authStore
 };
 
 export default stores;

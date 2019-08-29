@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { observer, inject } from "mobx-react";
 
 import {
   Button,
@@ -52,27 +53,38 @@ function Profile({ user }) {
   );
 }
 
-function Header({ auth }) {
-  const { isAuthenticated, user } = auth;
-  return (
-    <Navbar color="dark" dark expand="md">
-      <Container>
-        <NavbarBrand href="/">✨ Starsman</NavbarBrand>
+@inject("authStore")
+@observer
+class Header extends Component {
+  componentDidMount() {
+    this.props.authStore.fetch();
+  }
 
-        <Nav navbar>
-          <NavItem>
-            <NavLink href="/" style={{ lineHeight: "30px", fontSize: "1.2em" }}>
-              📥 Sync
-            </NavLink>
-          </NavItem>
-        </Nav>
+  render() {
+    const { user, isAuthenticated } = this.props.authStore;
+    return (
+      <Navbar color="dark" dark expand="md">
+        <Container>
+          <NavbarBrand href="/">✨ Starsman</NavbarBrand>
 
-        <Nav className="ml-auto" navbar>
-          {isAuthenticated ? <Profile user={user} /> : <Login />}
-        </Nav>
-      </Container>
-    </Navbar>
-  );
+          <Nav navbar>
+            <NavItem>
+              <NavLink
+                href="/"
+                style={{ lineHeight: "30px", fontSize: "1.2em" }}
+              >
+                📥 Sync
+              </NavLink>
+            </NavItem>
+          </Nav>
+
+          <Nav className="ml-auto" navbar>
+            {isAuthenticated ? <Profile user={user} /> : <Login />}
+          </Nav>
+        </Container>
+      </Navbar>
+    );
+  }
 }
 
 export default Header;

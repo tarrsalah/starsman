@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import fetch from "isomorphic-fetch";
 import { Container, Row, Col } from "reactstrap";
-import Navbar from "./Navbar.js";
+import Header from "./Header.js";
 import Repositories from "./Repositories.js";
 import Tags from "./Tags.js";
 import Languages from "./Languages.js";
@@ -22,6 +22,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
+        <Header />
         <Container className="my-4">
           <Row>
             <Col>
