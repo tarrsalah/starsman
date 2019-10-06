@@ -1,5 +1,6 @@
 import hapiCookie from "@hapi/cookie";
 import hapiBell from "@hapi/bell";
+import { storeUser } from "./db.js";
 
 import dotenv from "dotenv";
 const auth = {
@@ -45,9 +46,8 @@ const auth = {
         auth: "github",
         handler: async (request, h) => {
           let credentials = request.auth.credentials;
-          let db = request.server.app.db;
 
-          await db.storeUser({
+          await storeUser({
             username: credentials.profile.username,
             github_id: credentials.profile.id
           });

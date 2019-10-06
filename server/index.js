@@ -20,7 +20,6 @@ const start = async () => {
   server.app.cache = new cache.Cache();
 
   await server.register(require("@hapi/inert"));
-  await server.register(db);
   await server.register(auth);
   await server.register(api);
 

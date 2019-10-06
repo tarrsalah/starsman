@@ -35,12 +35,6 @@ async function getStars(request, h) {
   return h.response(response);
 }
 
-async function sync(request, h) {
-  const token = request.auth.credentials.token;
-  const repos = await github.getStarredRepos(token, 10);
-  return h.response(repos);
-}
-
 const options = {
   auth: {
     strategy: "session",
@@ -65,17 +59,6 @@ const api = {
       },
       {
         path: "/api/starred",
-        method: "GET",
-        handler: getStars,
-        options: {
-          auth: {
-            strategy: "session",
-            mode: "required"
-          }
-        }
-      },
-      {
-        path: "/api/sync",
         method: "GET",
         handler: getStars,
         options: {

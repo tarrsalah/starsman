@@ -6,7 +6,7 @@ const dbPromise = Promise.resolve()
     db.migrate({ force: "last", migrationsPath: "./server/migrations" })
   );
 
-async function storeUser(user) {
+export async function storeUser(user) {
   let db = await dbPromise;
   let { username, github_id } = user;
   try {
@@ -24,7 +24,7 @@ async function storeUser(user) {
   }
 }
 
-async function starRopository(userId, repoId) {
+export async function starRopository(userId, repoId) {
   let db = await dbPromise;
   try {
     db.exec("BEGIN TRANSACTION");
@@ -39,15 +39,3 @@ async function starRopository(userId, repoId) {
     await db.exec("ROLLBACK");
   }
 }
-
-const db = {
-  name: "db",
-  register: function(server, options) {
-    server.app.db = {
-      storeUser,
-      starRopository
-    };
-  }
-};
-
-export default db;
