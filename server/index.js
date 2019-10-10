@@ -1,6 +1,5 @@
 import path from "path";
 import Hapi from "@hapi/hapi";
-import cache from "memory-cache";
 
 import db from "./db.js";
 import auth from "./auth.js";
@@ -16,9 +15,6 @@ const start = async () => {
       }
     }
   });
-
-  server.app.cache = new cache.Cache();
-
   await server.register(require("@hapi/inert"));
   await server.register(auth);
   await server.register(api);

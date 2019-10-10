@@ -85,8 +85,8 @@ export class RepositoriesStore {
 
         let json = await response.json();
 
-        hasNextPage = json.hasNextPage;
-        endCursor = json.endCursor;
+        hasNextPage = json.pageInfo.hasNextPage;
+        endCursor = json.pageInfo.endCursor;
 
         runInAction(() => {
           this.fetchedRepositories.push(...json.repos);

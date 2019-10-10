@@ -1,9 +1,10 @@
 import hapiCookie from "@hapi/cookie";
 import hapiBell from "@hapi/bell";
+import dotenv from "dotenv";
+
 import { storeUser } from "./db.js";
 
-import dotenv from "dotenv";
-const auth = {
+export default {
   name: "auth",
   register: async function(server, options) {
     await server.register(hapiCookie);
@@ -77,5 +78,3 @@ const auth = {
     });
   }
 };
-
-export default auth;
