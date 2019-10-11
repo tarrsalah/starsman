@@ -85,11 +85,17 @@ export class RepositoriesStore {
 
         let json = await response.json();
 
-        hasNextPage = json.pageInfo.hasNextPage;
-        endCursor = json.pageInfo.endCursor;
+        let starredRepositories = json.data.viewer.starredRepositories;
+
+        hasNextPage = starredRepositories.pageInfo.hasNextPage;
+        endCursor = starredRepositories.pageInfo.endCursor;
+
+        let repos = starredRepositories.edges.map(edge => {
+          return edge.node;
+        });
 
         runInAction(() => {
-          this.fetchedRepositories.push(...json.repos);
+          this.fetchedRepositories.push(...repos);
         });
       }
 

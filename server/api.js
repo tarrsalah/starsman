@@ -17,6 +17,7 @@ export default {
 
         handler: async (request, h) => {
           let profile = request.auth.credentials.profile;
+
           let user = {
             id: profile.id,
             username: profile.username,
@@ -32,11 +33,8 @@ export default {
         path: "/api/starred",
         method: "GET",
         handler: async (request, h) => {
-          const key = request.auth.credentials.profile.id.toString();
-
           const next = request.query.next;
           const token = request.auth.credentials.token;
-
           return h.response(await github.getStarredRepos(token, 100, next));
         },
         options
