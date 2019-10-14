@@ -40,8 +40,17 @@ async function getStarredRepos(token, perPage, afterCursor) {
     body: JSON.stringify({ query })
   };
 
-  let response = await fetch(API_URL, options);
-  return response.json();
+  const response = await fetch(API_URL, options);
+  const json = await response.json();
+  const pageInfo = json.data.viewer.starredRepositories.pageInfo;
+
+  return {
+    repos: json.data.viewer.starredRepositories.edges.map(edge => {
+      return edge.node;
+    }),
+    endCursor: pageInfo.endCursor,
+    hasNextPage: pageInfo.hasNextPage
+  };
 }
 
 export default { getStarredRepos };

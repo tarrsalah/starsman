@@ -1,4 +1,5 @@
 import github from "./github.js";
+import NodeCache from "node-cache";
 
 export default {
   name: "api",
@@ -9,6 +10,8 @@ export default {
         mode: "required"
       }
     };
+
+    const cache = new NodeCache();
 
     server.route([
       {
@@ -33,9 +36,29 @@ export default {
         path: "/api/starred",
         method: "GET",
         handler: async (request, h) => {
+          const userId = request.auth.credentials.profile.id;
           const next = request.query.next;
           const token = request.auth.credentials.token;
-          return h.response(await github.getStarredRepos(token, 100, next));
+          const cached = cache.get(userId);
+
+          if (cached) {
+            if (cached.hasNextPage === false) {
+              return h.response(cached);
+            } else {
+              let fetched = await github.getStarredRepos(token, 100, next);
+              let response = {
+                repos: [...cached.repos, ...fetched.repos],
+                hasNextPage: fetched.hasNextPage,
+                endCursor: fetched.endCursor
+              };
+              cache.set(userId, response);
+              return h.response(response);
+            }
+          } else {
+            let fetched = await github.getStarredRepos(token, 100, next);
+            cache.set(userId, fetched);
+            return h.response(fetched);
+          }
         },
         options
       }
