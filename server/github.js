@@ -25,6 +25,7 @@ async function getStarredRepos(token, perPage, afterCursor) {
                   }
                 }
               }
+              totalCount
               pageInfo {
                 endCursor
                 hasNextPage

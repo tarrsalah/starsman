@@ -1,5 +1,5 @@
-import github from "./github.js";
 import NodeCache from "node-cache";
+import github from "./github.js";
 
 export default {
   name: "api",
@@ -47,7 +47,13 @@ export default {
             } else {
               let fetched = await github.getStarredRepos(token, 100, next);
               let response = {
-                repos: [...cached.repos, ...fetched.repos],
+                repos: [...cached.repos, ...fetched.repos].filter(
+                  (obj, pos, arr) => {
+                    return (
+                      arr.map(mapObj => mapObj["id"]).indexOf(obj["id"]) === pos
+                    );
+                  }
+                ),
                 hasNextPage: fetched.hasNextPage,
                 endCursor: fetched.endCursor
               };
