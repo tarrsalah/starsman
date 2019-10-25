@@ -26,10 +26,10 @@ const Repository = ({ repository }) => {
           </Fragment>
         )}
         <span>
-          <Octicon icon={Star} /> {repository.forkCount}
+          <Octicon icon={Star} /> {repository.stargazers.totalCount}
         </span>
         <span>
-          <Octicon icon={RepoForked} /> {repository.stargazers.totalCount}
+          <Octicon icon={RepoForked} /> {repository.forkCount}
         </span>
       </div>
     </div>

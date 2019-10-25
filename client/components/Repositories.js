@@ -14,6 +14,10 @@ class Repositories extends Component {
     this.props.repositoriesStore.fetch();
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
   handleChange(e) {
     e.preventDefault();
     if (this.timeout) clearTimeout(this.timeout);
@@ -34,8 +38,8 @@ class Repositories extends Component {
           <span className="badge badge-light">({count})</span>
           {isLoading && <span>...</span>}
         </h2>
-        <div className="repositories">
-          <form>
+        <div>
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <input
               name="filter"
               onChange={this.handleChange.bind(this)}
