@@ -12,7 +12,10 @@ export default {
       }
     };
 
-    const cache = new MemcacheClient({ server: "localhost:11211" });
+    const cache = new MemcacheClient({
+      server: { server: "localhost:11211" },
+      lifetime: 1000 * 60
+    });
 
     server.route([
       {
