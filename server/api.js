@@ -41,12 +41,16 @@ export default {
           const token = request.auth.credentials.token;
           const cached = cache.get(userId);
 
-          if (cached) {
+          let response = {};
+
+          if (!cached) {
+            response = await github.getStarredRepos(token, 100, next);
+          } else {
             if (cached.hasNextPage === false) {
               return h.response(cached);
             } else {
               let fetched = await github.getStarredRepos(token, 100, next);
-              let response = {
+              response = {
                 repos: [...cached.repos, ...fetched.repos].filter(
                   (obj, pos, arr) => {
                     return (
@@ -57,14 +61,11 @@ export default {
                 hasNextPage: fetched.hasNextPage,
                 endCursor: fetched.endCursor
               };
-              cache.set(userId, response);
-              return h.response(response);
             }
-          } else {
-            let fetched = await github.getStarredRepos(token, 100, next);
-            cache.set(userId, fetched);
-            return h.response(fetched);
           }
+
+          cache.set(userId, response);
+          return h.response(response);
         },
         options
       }
