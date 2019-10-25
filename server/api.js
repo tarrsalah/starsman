@@ -1,5 +1,6 @@
-import NodeCache from "node-cache";
+import MemcacheClient from "memcache-client";
 import github from "./github.js";
+import { promisify } from "util";
 
 export default {
   name: "api",
@@ -11,7 +12,7 @@ export default {
       }
     };
 
-    const cache = new NodeCache();
+    const cache = new MemcacheClient({ server: "localhost:11211" });
 
     server.route([
       {
@@ -39,19 +40,19 @@ export default {
           const userId = request.auth.credentials.profile.id;
           const next = request.query.next;
           const token = request.auth.credentials.token;
-          const cached = cache.get(userId);
+          const cached = await cache.get(userId);
 
           let response = {};
 
           if (!cached) {
             response = await github.getStarredRepos(token, 100, next);
           } else {
-            if (cached.hasNextPage === false) {
-              return h.response(cached);
+            if (cached.value.hasNextPage === false) {
+              return h.response(cached.value);
             } else {
               let fetched = await github.getStarredRepos(token, 100, next);
               response = {
-                repos: [...cached.repos, ...fetched.repos].filter(
+                repos: [...cached.value.repos, ...fetched.repos].filter(
                   (obj, pos, arr) => {
                     return (
                       arr.map(mapObj => mapObj["id"]).indexOf(obj["id"]) === pos
@@ -64,7 +65,7 @@ export default {
             }
           }
 
-          cache.set(userId, response);
+          await cache.set(userId, response);
           return h.response(response);
         },
         options
