@@ -94,9 +94,13 @@ export class RepositoriesStore {
         });
       }
 
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     } catch (err) {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 }
