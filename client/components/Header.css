@@ -3,9 +3,9 @@
 }
 
 .header nav {
+  font-size: 1em;
   max-width: 70em;
-  margin: 0 auto 2em auto;
-  border-bottom: 1px dotted #666;
+  margin: 0 auto;
   clear: both;
 }
 

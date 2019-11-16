@@ -13,7 +13,8 @@ class App extends Component {
           style={{
             display: "flex",
             margin: "0 auto",
-            maxWidth: "70em"
+            maxWidth: "70em",
+            paddingTop: "1em"
           }}
         >
           <div style={{ flex: 2 }}>

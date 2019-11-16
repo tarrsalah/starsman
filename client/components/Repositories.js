@@ -54,18 +54,27 @@ class Repositories extends Component {
               placeholder="Find repositories..."
             />
           </form>
-          <AutoSizer>
-            {({ height, width }) => (
-              <List
-                height={1000}
-                itemCount={repositories.length}
-                itemSize={150}
-                width={width}
-              >
-                {Row}
-              </List>
-            )}
-          </AutoSizer>
+          <div
+            style={{
+              height: "120vh",
+              marginTop: "1em",
+              padding: "1em 0 1em 1em",
+              border: "1px solid #f0f0f0"
+            }}
+          >
+            <AutoSizer>
+              {({ height, width }) => (
+                <List
+                  height={height}
+                  itemCount={repositories.length}
+                  itemSize={160}
+                  width={width}
+                >
+                  {Row}
+                </List>
+              )}
+            </AutoSizer>
+          </div>
         </div>
       </section>
     );
