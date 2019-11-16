@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { inject, observer } from "mobx-react";
 import Repository from "./Repository.js";
+import { FixedSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 @inject("repositoriesStore")
 @observer
@@ -30,6 +32,11 @@ class Repositories extends Component {
 
   render() {
     const { repositories, isLoading, count } = this.props.repositoriesStore;
+    const Row = ({ index, style }) => (
+      <div style={style}>
+        <Repository repository={repositories[index]} />
+      </div>
+    );
 
     return (
       <section>
@@ -47,9 +54,18 @@ class Repositories extends Component {
               placeholder="Find repositories..."
             />
           </form>
-          {repositories.map(repository => (
-            <Repository key={repository.id} repository={repository} />
-          ))}
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                height={1000}
+                itemCount={repositories.length}
+                itemSize={150}
+                width={width}
+              >
+                {Row}
+              </List>
+            )}
+          </AutoSizer>
         </div>
       </section>
     );
