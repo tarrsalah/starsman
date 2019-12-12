@@ -8,11 +8,11 @@ const dbPromise = Promise.resolve()
 
 export async function storeUser(user) {
   let db = await dbPromise;
-  let { username, github_id } = user;
+  let { username, id } = user;
   try {
     await db.exec("BEGIN TRANSACTION;");
     await db.exec(
-      `insert or ignore into users(username, github_id) values ("${username}", "${github_id}")`
+      `insert or ignore into users(username, github_id) values ("${username}", "${id}")`
     );
     await db.exec(
       `update users set timestamp=datetime("now") where username="${username}"`
