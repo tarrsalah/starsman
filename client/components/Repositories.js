@@ -47,14 +47,16 @@ class Repositories extends Component {
         </h2>
         <div>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input
-              name="filter"
-              type="search"
-              autoComplete="off"
-              autoCorrect="off"
-              onChange={this.handleChange.bind(this)}
-              placeholder="Find repositories..."
-            />
+            <label>
+              <input
+                name="filter"
+                type="search"
+                autoComplete="off"
+                autoCorrect="off"
+                onChange={this.handleChange.bind(this)}
+                placeholder="Find repositories..."
+              />
+            </label>
           </form>
           <div
             style={{

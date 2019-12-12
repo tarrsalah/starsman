@@ -46,8 +46,9 @@ a:hover {
 }
 
 input[type="search"] {
+  font-size: 1.2em;
   border-radius: 0;
-  padding: 0.25rem 0.375rem;
+  padding: 0.5rem 3rem;
 }
 
 form input {
@@ -56,6 +57,19 @@ form input {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
+}
+
+label {
+  position: relative;
+}
+
+label:before {
+  content: "🔍";
+  position: absolute;
+  font-size: 1.2rem;
+  left: 0.5rem;
+  top: -5px;
+  bottom: 0;
 }
 
 :global .pull-left {
