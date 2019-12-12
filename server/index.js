@@ -91,12 +91,12 @@ app.get("/api/starred", async function(req, res) {
   let response = {};
 
   if (!cached) {
-    response = await github.getStarredRepos(token, 100, next);
+    response = await github(token);
   } else {
     if (cached.hasNextPage === false) {
       return res.json(cached);
     } else {
-      let fetched = await github.getStarredRepos(token, 100, next);
+      let fetched = await github(token, next);
       response = {
         repos: [...cached.repos, ...fetched.repos].filter((obj, pos, arr) => {
           return arr.map(mapObj => mapObj["id"]).indexOf(obj["id"]) === pos;
