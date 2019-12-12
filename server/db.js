@@ -23,19 +23,3 @@ export async function storeUser(user) {
     await db.exec("ROLLBACK");
   }
 }
-
-export async function starRopository(userId, repoId) {
-  let db = await dbPromise;
-  try {
-    db.exec("BEGIN TRANSACTION");
-    await db.exec(
-      `insert or ignore into stars(user_id, repo_id) values ("${userId}", "${repoId}")`
-    );
-    await db.exec(
-      `update stars set timestamp=datetime("now") where user_id="${userId}" and repo_id="${repoId}"`
-    );
-    await db.exec("COMMIT");
-  } catch (err) {
-    await db.exec("ROLLBACK");
-  }
-}
