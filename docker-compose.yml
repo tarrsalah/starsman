@@ -1,6 +1,0 @@
-version: '3.7'
-services:
-  cache:
-    image: memcached
-    ports:
-      - "11211:11211"
