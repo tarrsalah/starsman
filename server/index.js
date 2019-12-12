@@ -57,6 +57,11 @@ app.get(
   }
 );
 
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 app.get("/api/user", async function(req, res) {
   if (!req.user) {
     res.status(403);
@@ -107,7 +112,7 @@ app.get("/api/starred", async function(req, res) {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile("../public/index.html");
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 app.listen(3000);
