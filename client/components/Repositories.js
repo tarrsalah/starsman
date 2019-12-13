@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import Repository from "./Repository.js";
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import styles from "./Repository.css";
 
 @inject("repositoriesStore")
 @observer
@@ -58,14 +59,8 @@ class Repositories extends Component {
               />
             </label>
           </form>
-          <div
-            style={{
-              height: "120vh",
-              marginTop: "1em",
-              padding: "1em 0 1em 1em",
-              border: "1px solid #f0f0f0"
-            }}
-          >
+
+          <div className={styles.repositories}>
             <AutoSizer>
               {({ height, width }) => (
                 <List

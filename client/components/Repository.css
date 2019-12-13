@@ -1,7 +1,13 @@
+.repositories {
+  height: 120vh;
+  margin-top: 1em;
+  border: 1px solid #f0f0f0;
+}
+
 .repository {
   border-bottom: 1px #f0f0f0 solid;
   margin-bottom: 1em;
-  padding-bottom: 1em;
+  padding: 1em;
 }
 
 .repository h3 a {
