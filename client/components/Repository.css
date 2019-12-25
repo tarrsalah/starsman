@@ -15,7 +15,7 @@
 }
 
 .footer {
-  font-size: 0.9em;
+  font-size: 0.85em;
   margin-top: 1em;
 }
 
@@ -28,4 +28,11 @@
   height: 0.8em;
   display: inline-block;
   border-radius: 0.8em;
+}
+
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }

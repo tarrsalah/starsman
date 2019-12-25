@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  margin: 0 auto;
+  max-width: 70em;
+  padding-top: 1em;
+}
+
+.left {
+  flex: 1;
+}
+
+.right {
+  flex: 2;
+  padding-left: 1em;
+}

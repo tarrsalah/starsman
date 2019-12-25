@@ -3,27 +3,31 @@ import fetch from "isomorphic-fetch";
 import Header from "./Header.js";
 import Repositories from "./Repositories.js";
 import Languages from "./Languages.js";
+import { observer, inject } from "mobx-react";
+import style from "./App.css";
 
+@inject("authStore")
+@observer
 class App extends Component {
+  componentDidMount() {
+    this.props.authStore.fetch();
+  }
+
   render() {
+    const { isAuthenticated } = this.props.authStore;
     return (
       <React.Fragment>
         <Header />
-        <div
-          style={{
-            display: "flex",
-            margin: "0 auto",
-            maxWidth: "70em",
-            paddingTop: "1em"
-          }}
-        >
-          <div style={{ flex: 2 }}>
-            <Languages loading={false} />
+        {isAuthenticated && (
+          <div className={style.main}>
+            <div className={style.left}>
+              <Languages loading={false} />
+            </div>
+            <div className={style.right}>
+              <Repositories />
+            </div>
           </div>
-          <div style={{ flex: 3, paddingLeft: "1em" }}>
-            <Repositories />
-          </div>
-        </div>
+        )}
       </React.Fragment>
     );
   }
