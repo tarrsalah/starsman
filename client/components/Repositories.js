@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import Repository from "./Repository.js";
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import styles from "./Repository.css";
+import styles from "./Repositories.css";
 
 @inject("repositoriesStore")
 @observer
