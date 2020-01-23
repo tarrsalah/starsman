@@ -13,10 +13,6 @@ function Profile({ user }) {
 @inject("authStore")
 @observer
 class Header extends Component {
-  componentDidMount() {
-    this.props.authStore.fetch();
-  }
-
   render() {
     const { user } = this.props.authStore;
 

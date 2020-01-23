@@ -3,6 +3,7 @@ import { observable, action, runInAction } from "mobx";
 class AuthStore {
   @observable user;
   @observable isAuthenticated;
+  @observable isLoading;
 
   @action
   async fetch() {
@@ -13,7 +14,12 @@ class AuthStore {
         "Content-Type": "application/json"
       }
     };
+
     try {
+      runInAction(() => {
+        this.isLoading = true;
+      });
+
       let response = await fetch("http://localhost:3000/api/user", options);
       let user = await response.json();
 
@@ -21,11 +27,18 @@ class AuthStore {
         runInAction(() => {
           this.user = user;
           this.isAuthenticated = true;
+          this.isLoading = false;
+        });
+      } else {
+        runInAction(() => {
+          this.isAuthenticated = false;
+          this.isLoading = false;
         });
       }
     } catch (err) {
       runInAction(() => {
         this.isAuthenticated = false;
+        this.isLoading = false;
       });
     }
   }

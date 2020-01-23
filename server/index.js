@@ -63,7 +63,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/api/user", async function(req, res) {
-  if (typeof req.user == "undefined") {
+  if (!req.user) {
     res.status(403);
     res.json({});
     return;

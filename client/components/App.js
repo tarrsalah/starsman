@@ -48,11 +48,15 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.authStore;
-    if (isAuthenticated) {
-      return <Online />;
+    const { isAuthenticated, isLoading } = this.props.authStore;
+    if (isLoading) {
+      return <span></span>;
+    } else {
+      if (isAuthenticated) {
+        return <Online />;
+      }
+      return <Offline />;
     }
-    return <Offline />;
   }
 }
 
