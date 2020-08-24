@@ -1,16 +1,31 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Octicon, { Star, RepoForked, Repo } from "@primer/octicons-react";
+import Language from "./Language.js";
 import styles from "./Repository.css";
 
-const k = num => {
+const k = (num) => {
   return Math.abs(num) > 999
     ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
     : Math.sign(num) * Math.abs(num);
 };
 
-const Repository = ({ repository }) => {
-  const language = repository.primaryLanguage;
+function Stargazers({ count }) {
+  return (
+    <span>
+      <Octicon icon={Star} /> {k(count)}
+    </span>
+  );
+}
 
+function Forked({ count }) {
+  return (
+    <span>
+      <Octicon icon={RepoForked} /> {k(count)}
+    </span>
+  );
+}
+
+export default function Repository({ repository }) {
   return (
     <div className={styles.repository}>
       <h3>
@@ -21,26 +36,10 @@ const Repository = ({ repository }) => {
       <p className={styles.description}>{repository.description}</p>
 
       <div className={styles.footer}>
-        {language && (
-          <Fragment>
-            <span
-              className={styles.language}
-              style={{
-                backgroundColor: language.color
-              }}
-            />
-            <span> {language.name}</span>
-          </Fragment>
-        )}
-        <span>
-          <Octicon icon={Star} /> {k(repository.stargazers.totalCount)}
-        </span>
-        <span>
-          <Octicon icon={RepoForked} /> {k(repository.forkCount)}
-        </span>
+        <Language language={repository.primaryLanguage} />
+        <Stargazers count={repository.stargazers.totalCount} />
+        <Forked count={repository.forkCount} />
       </div>
     </div>
   );
-};
-
-export default Repository;
+}

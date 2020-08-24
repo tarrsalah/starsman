@@ -13,15 +13,8 @@
   margin-top: 1em;
 }
 
-.footer > span:not(.language) {
-  margin-right: 1.5em;
-}
-
-.footer > span.language {
-  width: 0.8em;
-  height: 0.8em;
-  display: inline-block;
-  border-radius: 0.8em;
+.footer > span {
+    margin-right: 1.5em;
 }
 
 .description {
