@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import fetch from "isomorphic-fetch";
 import Header from "./Header.js";
 import Repositories from "./Repositories.js";
-import Octicon, { MarkGithub } from "@primer/octicons-react";
+import Octicon, {MarkGithub} from "@primer/octicons-react";
 import Languages from "./Languages.js";
-import { observer, inject } from "mobx-react";
+
+import {useAuth} from "../auth.js";
 import style from "./App.css";
 
 function Login() {
@@ -40,24 +41,14 @@ function Online() {
   );
 }
 
-@inject("authStore")
-@observer
-class App extends Component {
-  componentDidMount() {
-    this.props.authStore.fetch();
-  }
-
-  render() {
-    const { isAuthenticated, isLoading } = this.props.authStore;
-    if (isLoading) {
-      return <span></span>;
-    } else {
-      if (isAuthenticated) {
-        return <Online />;
-      }
-      return <Offline />;
+export default function App() {
+  let {user, isLoading} = useAuth();
+  if (isLoading) {
+    return null;
+  } else {
+    if (user.id) {
+      return <Online />;
     }
+    return <Offline />;
   }
 }
-
-export default App;

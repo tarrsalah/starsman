@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { observer, inject } from "mobx-react";
+import { useAuth } from "../auth.js";
 import styles from "./Header.css";
 
 function Profile({ user }) {
@@ -10,21 +11,14 @@ function Profile({ user }) {
   );
 }
 
-@inject("authStore")
-@observer
-class Header extends Component {
-  render() {
-    const { user } = this.props.authStore;
-
-    return (
-      <header className={styles.header}>
-        <nav>
-          <a href="/"> ✨ Starsman </a>
-          <Profile user={user} />
-        </nav>
-      </header>
-    );
-  }
+export default function Header() {
+  const user  = useAuth();
+  return (
+    <header className={styles.header}>
+      <nav>
+        <a href="/"> ✨ Starsman </a>
+        <Profile user={user} />
+      </nav>
+    </header>
+  );
 }
-
-export default Header;

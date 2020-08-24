@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 import stores from "./stores";
 import App from "./components/App.js";
+import { AuthProvider } from "./auth.js";
 import "./style.css";
 
 ReactDOM.render(
-  <Provider {...stores}>
-    <App />
-  </Provider>,
+  <AuthProvider>
+    <Provider {...stores}>
+      <App />
+    </Provider>
+  </AuthProvider>,
   document.getElementById("root")
 );
