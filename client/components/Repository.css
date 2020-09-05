@@ -23,3 +23,11 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+.language {
+  width: 0.8em;
+  height: 0.8em;
+  display: inline-block;
+  margin-right: 0 !important;
+  border-radius: 0.8em;
+}

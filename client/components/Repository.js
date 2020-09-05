@@ -1,6 +1,5 @@
-import React from "react";
-import Octicon, { Star, RepoForked, Repo } from "@primer/octicons-react";
-import Language from "./Language.js";
+import React, {Fragment} from "react";
+import Octicon, {Star, RepoForked, Repo} from "@primer/octicons-react";
 import styles from "./Repository.css";
 
 const k = (num) => {
@@ -9,7 +8,25 @@ const k = (num) => {
     : Math.sign(num) * Math.abs(num);
 };
 
-function Stargazers({ count }) {
+function Language({language}) {
+  if (!language) {
+    return null;
+  }
+
+  return (
+    <Fragment>
+      <span
+        className={styles.language}
+        style={{
+          backgroundColor: language.color
+        }}
+      />
+      <span> {language.name}</span>
+    </Fragment>
+  );
+}
+
+function Stargazers({count}) {
   return (
     <span>
       <Octicon icon={Star} /> {k(count)}
@@ -17,7 +34,7 @@ function Stargazers({ count }) {
   );
 }
 
-function Forked({ count }) {
+function Forked({count}) {
   return (
     <span>
       <Octicon icon={RepoForked} /> {k(count)}
@@ -25,7 +42,7 @@ function Forked({ count }) {
   );
 }
 
-export default function Repository({ repository }) {
+export default function Repository({repository}) {
   return (
     <div className={styles.repository}>
       <h3>
