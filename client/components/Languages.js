@@ -1,32 +1,32 @@
-import React, {Fragment, Component} from "react";
+import React, {Fragment, useState} from "react";
 import styles from "./Languages.css";
 
-class Languages extends Component {
-  render() {
-    let languages = this.props.languages;
-
-    return (
-      <div>
-        <h3>📈 Filter by Language</h3>
-        <ul className={styles.languages}>
-          {Object.keys(languages).map((key) => {
-            let language = languages[key];
-
-            return (
-              <li
-                key={key}
-                className={styles.language}
-                onClick={this.handleClick}
-              >
-                <span>{language.name}</span>
-                <span className={styles.count}>{language.count}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
+export default function Languages({languages, toggleLanguage}) {
+  function handleClick(name) {
+    return function (e) {
+      toggleLanguage(name);
+    };
   }
-}
 
-export default Languages;
+  return (
+    <div>
+      <h3>📈 Filter by Language</h3>
+      <ul className={styles.languages}>
+        {Object.keys(languages).map((name) => {
+          let language = languages[name];
+          let selectedClass = language.selected? styles.selected: ""
+          return (
+            <li
+              key={name}
+              className={`${styles.language} ${selectedClass}`}
+              onClick={handleClick(name)}
+            >
+              <span>{language.name}</span>
+              <span className={styles.count}>{language.count}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}

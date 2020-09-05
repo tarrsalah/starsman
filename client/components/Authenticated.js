@@ -8,6 +8,7 @@ import style from "./App.css";
 
 export default function () {
   const [fetchedRepos, setFetchedRepos] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("");
 
@@ -22,14 +23,16 @@ export default function () {
     }, 100);
   };
 
-  const count = () => {
-    return fetchedRepos.length;
-  };
+  function toggleLanguage(name) {
+    const clone = new Set(selectedLanguages);
+    clone.has(name) ? clone.delete(name) : clone.add(name);
+    setSelectedLanguages(clone);
+  }
 
   const languages = () => {
     let map = {};
 
-    fetchedRepos.forEach((repository) => {
+    filteredByName().forEach((repository) => {
       if (!repository.primaryLanguage) {
         return;
       }
@@ -39,6 +42,10 @@ export default function () {
       let language = {};
       language.name = name;
       language.color = repository.primaryLanguage.color;
+
+      if (selectedLanguages.has(name)) {
+        language.selected = true;
+      }
 
       if (map.hasOwnProperty(name)) {
         map[name].count++;
@@ -51,18 +58,29 @@ export default function () {
     return map;
   };
 
-  const repositories = () => {
-    if (filter.length < 3) {
-      return fetchedRepos;
+  function filteredByName() {
+    if (filter.length >= 3) {
+      return fetchedRepos.filter((repo) => {
+        return fuzzysearch(
+          filter.toLowerCase(),
+          repo.nameWithOwner.toLowerCase() || ""
+        );
+      });
     }
+    return fetchedRepos;
+  }
 
-    return fetchedRepos.filter((repo) => {
-      return fuzzysearch(
-        filter.toLowerCase(),
-        repo.nameWithOwner.toLowerCase() || ""
-      );
-    });
-  };
+  function filteredByLanguage() {
+    if (selectedLanguages.size > 0) {
+      return filteredByName().filter((repo) => {
+        return (
+          repo.primaryLanguage &&
+          selectedLanguages.has(repo.primaryLanguage.name)
+        );
+      });
+    }
+    return filteredByName();
+  }
 
   useEffect(() => {
     async function fetchRepos() {
@@ -114,12 +132,15 @@ export default function () {
       <Header />
       <div className={style.main}>
         <div className={style.left}>
-          <Languages loading={false} languages={languages()} />
+          <Languages
+            loading={false}
+            languages={languages()}
+            toggleLanguage={toggleLanguage}
+          />
         </div>
         <div className={style.right}>
           <Repositories
-            repos={repositories()}
-            count={count()}
+            repos={filteredByLanguage()}
             isLoading={isLoading}
             handleFilter={handleFilter}
           />

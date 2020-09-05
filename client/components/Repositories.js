@@ -27,7 +27,7 @@ class Repositories extends Component {
       <section>
         <h2>
           📄 Repositories
-          <span className="badge badge-light">({count})</span>
+          <span className="badge badge-light">({repos.length})</span>
           {isLoading && <span>...</span>}
         </h2>
         <div>
