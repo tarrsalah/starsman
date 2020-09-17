@@ -19,7 +19,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback"
+      callbackURL: "http://localhost:5000/auth/github/callback"
     },
     async function(accessToken, refreshToken, profile, cb) {
       try {
@@ -116,4 +116,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
-app.listen(3000);
+app.listen(5000);

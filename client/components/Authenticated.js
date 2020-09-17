@@ -84,7 +84,7 @@ export default function () {
 
   useEffect(() => {
     async function fetchRepos() {
-      const url = "http://localhost:3000/api/starred";
+      const url = "http://localhost:5000/api/starred";
       const options = {
         method: "GET",
         credentials: "include",

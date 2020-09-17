@@ -18,7 +18,7 @@ function AuthProvider({children}) {
       };
 
       try {
-        let response = await fetch("http://localhost:3000/api/user", options);
+        let response = await fetch("http://localhost:5000/api/user", options);
         let user = await response.json();
         setUser(user);
       } catch (error) {
