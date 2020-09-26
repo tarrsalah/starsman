@@ -7,7 +7,6 @@ import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github";
 import NodeCache from "node-cache";
 import dotenv from "dotenv";
-import { storeUser } from "./db.js";
 import github from "./github.js";
 
 const app = express();
@@ -23,7 +22,6 @@ passport.use(
     },
     async function(accessToken, refreshToken, profile, cb) {
       try {
-        await storeUser(profile);
         let user = { ...profile, accessToken };
         return cb(null, user);
       } catch (err) {

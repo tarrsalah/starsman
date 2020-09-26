@@ -22,8 +22,7 @@
     "react": "^16.8.0 || 16.9.0-alpha.0",
     "react-dom": ">=16.8.0",
     "react-virtualized-auto-sizer": "^1.0.2",
-    "react-window": "^1.8.5",
-    "sqlite": "^3.0.3"
+    "react-window": "^1.8.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
