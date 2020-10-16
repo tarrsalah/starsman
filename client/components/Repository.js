@@ -1,6 +1,5 @@
-import React, {Fragment} from "react";
-import Octicon, {Star, RepoForked, Repo} from "@primer/octicons-react";
-import styles from "./Repository.css";
+import React, { Fragment } from "react";
+import Octicon, { Star, RepoForked, Repo } from "@primer/octicons-react";
 
 const k = (num) => {
   return Math.abs(num) > 999
@@ -8,7 +7,7 @@ const k = (num) => {
     : Math.sign(num) * Math.abs(num);
 };
 
-function Language({language}) {
+function Language({ language }) {
   if (!language) {
     return null;
   }
@@ -16,25 +15,26 @@ function Language({language}) {
   return (
     <Fragment>
       <span
-        className={styles.language}
+        className="inline-block rounded-xl w-3 h-3 mr-2"
         style={{
-          backgroundColor: language.color
+          backgroundColor: language.color,
         }}
       />
-      <span> {language.name}</span>
+      <span />
+      <span className="mr-6">{language.name}</span>
     </Fragment>
   );
 }
 
-function Stargazers({count}) {
+function Stargazers({ count }) {
   return (
-    <span>
+    <span className="mr-6">
       <Octicon icon={Star} /> {k(count)}
     </span>
   );
 }
 
-function Forked({count}) {
+function Forked({ count }) {
   return (
     <span>
       <Octicon icon={RepoForked} /> {k(count)}
@@ -42,17 +42,16 @@ function Forked({count}) {
   );
 }
 
-export default function Repository({repository}) {
+export default function Repository({ repository }) {
   return (
-    <div className={styles.repository}>
-      <h3>
-        <Octicon icon={Repo} />
+    <div>
+      <h3 className="font-bold text-lg text-blue-500 mb-2">
         <a href={repository.url}>{repository.nameWithOwner}</a>
       </h3>
 
-      <p className={styles.description}>{repository.description}</p>
+      <p className="mb-4 leading-6">{repository.description}</p>
 
-      <div className={styles.footer}>
+      <div className="text-sm text-gray-900">
         <Language language={repository.primaryLanguage} />
         <Stargazers count={repository.stargazers.totalCount} />
         <Forked count={repository.forkCount} />

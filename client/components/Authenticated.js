@@ -4,7 +4,6 @@ import fuzzysearch from "fuzzysearch";
 import Header from "./Header.js";
 import Repositories from "./Repositories.js";
 import Languages from "./Languages.js";
-import style from "./App.css";
 
 export default function () {
   const [fetchedRepos, setFetchedRepos] = useState([]);
@@ -20,7 +19,7 @@ export default function () {
 
     timeout = setTimeout(() => {
       setFilter(searchText);
-    }, 100);
+    }, 1000);
   };
 
   function toggleLanguage(name) {
@@ -130,15 +129,15 @@ export default function () {
   return (
     <React.Fragment>
       <Header />
-      <div className={style.main}>
-        <div className={style.left}>
+      <div className="flex max-w-6xl mx-auto">
+        <div className="w-1/3">
           <Languages
             loading={false}
             languages={languages()}
             toggleLanguage={toggleLanguage}
           />
         </div>
-        <div className={style.right}>
+        <div className="w-2/3">
           <Repositories
             repos={filteredByLanguage()}
             isLoading={isLoading}

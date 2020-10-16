@@ -2,8 +2,8 @@
   "scripts": {
     "start": "nodemon -r @babel/register --watch server server/index.js",
     "test": "tape tests/**/*.js",
-    "dev": "parcel watch ./client/index.js -o bundle -d ./public",
-    "build": "parcel build ./client/index.js -o bundle -d ./public"
+    "dev": "parcel watch ./client/index.html -o index -d ./public",
+    "build": "parcel build ./client/index.html -o index -d ./public"
   },
   "dependencies": {
     "@primer/octicons-react": "^9.1.1",
@@ -15,6 +15,8 @@
     "fuzzysearch": "^1.0.3",
     "graphql-request": "^1.8.2",
     "isomorphic-fetch": "^2.2.1",
+    "mobx": "^6.0.0",
+    "mobx-react": "^7.0.0",
     "node-cache": "^5.1.0",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
@@ -22,7 +24,8 @@
     "react": "^16.8.0 || 16.9.0-alpha.0",
     "react-dom": ">=16.8.0",
     "react-virtualized-auto-sizer": "^1.0.2",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "tailwindcss": "^1.9.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

@@ -1,7 +1,7 @@
 /node_modules/
 /yarn-error.log
 /public/*
-!public/index.html
+!public/.gitkeep
 /.cache/
 /client/components/.tern-port
 .tern-port

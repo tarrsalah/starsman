@@ -3,7 +3,6 @@ import {FixedSizeList as List} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import Repository from "./Repository.js";
-import styles from "./Repositories.css";
 
 class Repositories extends Component {
   constructor(props) {
@@ -25,15 +24,16 @@ class Repositories extends Component {
 
     return (
       <section>
-        <h2>
+        <h1 className="font-bold text-2xl">
           📄 Repositories
           <span className="badge badge-light">({repos.length})</span>
           {isLoading && <span>...</span>}
-        </h2>
+        </h1>
         <div>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <label>
+            <label className="label">
               <input
+                className="leading-normal border-2 border-gray-100 w-full px-10 py-2"
                 name="filter"
                 type="search"
                 autoComplete="off"
@@ -44,7 +44,7 @@ class Repositories extends Component {
             </label>
           </form>
 
-          <div className={styles.repositories}>
+          <div className="min-h-screen py-4 pl-4 mt-4 border-2 border-gray-100">
             <AutoSizer>
               {({height, width}) => (
                 <List
