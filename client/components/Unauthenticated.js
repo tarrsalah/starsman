@@ -1,10 +1,10 @@
 import React from "react";
-import Octicon, {MarkGithub} from "@primer/octicons-react";
+import {MarkGithubIcon} from "@primer/octicons-react";
 
 function Login() {
   return (
     <a href="/auth/github">
-      Login with github <Octicon verticalAlign="middle" icon={MarkGithub} />
+      Login with github <MarkGithubIcon/>
     </a>
   );
 }
