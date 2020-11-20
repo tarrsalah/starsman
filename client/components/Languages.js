@@ -20,7 +20,7 @@ export default function Languages({ languages, toggleLanguage }) {
               onClick={handleClick(name)}
               className={`p-2 mb-1 hover:bg-gray-100 ${selectedClass}`}
             >
-              <span>{language.name}</span>
+              <span>{language.name || "Text"}</span>
               <span className="float-right">{language.count}</span>
             </li>
           );

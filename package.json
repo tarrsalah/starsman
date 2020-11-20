@@ -1,8 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon -r @babel/register --watch server server/index.js",
+    "dev": "parcel watch ./client/index.html -o index -d ./public & nodemon -r @babel/register --watch server server/index.js",
     "test": "tape tests/**/*.js",
-    "dev": "parcel watch ./client/index.html -o index -d ./public",
     "build": "parcel build ./client/index.html -o index -d ./public"
   },
   "dependencies": {
@@ -24,6 +23,7 @@
     "postcss-modules": "^3.2.2",
     "react": "^16.8.0 || 16.9.0-alpha.0",
     "react-dom": ">=16.8.0",
+    "react-truncate": "^2.4.0",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "tailwindcss": "^1.9.3"

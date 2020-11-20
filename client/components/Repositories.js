@@ -50,7 +50,7 @@ class Repositories extends Component {
                 <List
                   height={height}
                   itemCount={repos.length}
-                  itemSize={140}
+                  itemSize={160}
                   width={width}
                 >
                   {Row}
