@@ -24,6 +24,7 @@
     "postcss-modules": "^3.2.2",
     "react": "^16.8.0 || 16.9.0-alpha.0",
     "react-dom": ">=16.8.0",
+    "react-truncate": "^2.4.0",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "tailwindcss": "^1.9.3"

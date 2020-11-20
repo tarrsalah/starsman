@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { StarIcon, RepoForkedIcon} from "@primer/octicons-react";
+import Truncate from "react-truncate";
+import { StarIcon, RepoForkedIcon } from "@primer/octicons-react";
 
 const k = (num) => {
   return Math.abs(num) > 999
@@ -29,7 +30,7 @@ function Language({ language }) {
 function Stargazers({ count }) {
   return (
     <span className="mr-6">
-      <StarIcon/> {k(count)}
+      <StarIcon /> {k(count)}
     </span>
   );
 }
@@ -37,7 +38,7 @@ function Stargazers({ count }) {
 function Forked({ count }) {
   return (
     <span>
-      <RepoForkedIcon/> {k(count)}
+      <RepoForkedIcon /> {k(count)}
     </span>
   );
 }
@@ -49,7 +50,9 @@ export default function Repository({ repository }) {
         <a href={repository.url}>{repository.nameWithOwner}</a>
       </h3>
 
-      <p className="mb-4 leading-6">{repository.description}</p>
+      <p className="mb-4 leading-6 text-sm">
+        <Truncate>{repository.description}</Truncate>
+      </p>
 
       <div className="text-sm text-gray-900">
         <Language language={repository.primaryLanguage} />
